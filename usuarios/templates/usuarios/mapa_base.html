@@ -1,0 +1,53 @@
+{% load static %}
+
+
+    
+    <!-- ============================================================== -->
+    <!-- Sales chart -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Mapa de Incidentes</h4>
+                            <h5 class="card-subtitle">Incidentes reportados por los ciudadanos</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- column -->
+                        <div class="col-lg-9">
+                            <div class="flot-chart" style="height: 500px;" id="mapa">
+                             
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row">
+                             
+                                {% for tipo_incidente in tipo_incidentes  %}
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-dark p-10 text-white text-center">
+                                      
+                                        <h5 class="m-b-0 m-t-5">{{tipo_incidente.total}}</h5>
+                                        <small class="font-light">{{tipo_incidente.titulo}}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                
+                            </div>
+                        </div>
+                        <!-- column -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Sales chart -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Recent comment and chats -->
+    <!-- ============================================================== -->
+

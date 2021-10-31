@@ -1,0 +1,30 @@
+  {% load static %}
+  <ul class="list-style-none">
+
+                    {% for incidente in page.object_list%}
+                    <li class="d-flex no-block card-body border-top">
+                        <div class="my-auto p-2"><img src="{% static 'images/users/1.jpg' %}" alt="user" width="50"
+                                class="rounded-circle"></div>
+                        <div class="comment-text w-100">
+                            <h5 class="font-medium">{{incidente.tipo_incidente|title}}</h5>
+                            <h6 class="font-medium">{{incidente.titulo | title}}</h6>
+                            <span class="d-block">{{incidente.descripcion}}</span>
+                            <div class="comment-footer mt-1">
+                                <small class="text-muted d-block">Dirección: {{incidente.direccion}}</small>
+                                <small class="text-muted">{{incidente.hora}}</small>
+                            </div>
+                        </div>
+                        <div class="my-auto" style="min-width:80px">
+                            <div class="text-right">
+                                <h5 class="text-muted m-b-0">{{incidente.fecha|date:'d-M'}}</h5>
+
+                                <span class="text-muted">{{incidente.fecha|date:'Y'}}</span>
+                            </div>
+                        </div>
+                    </li>
+
+                    {% empty %}
+                    <li class="d-flex no-block card-body border-top"> No hay incidentes recientes</li>
+                    {% endfor %}
+                </ul>
+            

@@ -1,0 +1,89 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+{% block extra_script%}
+  
+<script src="{% static "js/scripts.js" %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyWWYeqdVOpfYEuz4s3MkFAL_LCA_nUOo" async defer></script>
+<script src="{% static "js/mapa/ubicacion.js" %}"></script>
+
+{% endblock extra_script %}
+{% block content %}
+ {% block extra_style %}
+      <link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet"/>
+   {% endblock extra_style %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Mapa Predictivo</h4>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href={%url 'usuarios:index'%}>Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mapa Predictivo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Predicción de Delitos</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Sales chart -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Mapa Predictivo</h4>
+                            <h5 class="card-subtitle mb-0">Predicción de delitos </h5>
+                             <small class="text-muted">{{fecha_hoy}}</small>
+                          
+                           
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- column -->
+                        <div class="col-lg-12">
+                            <div class="flot-chart" style="height: 500px;" id="mapa">
+                             
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Sales chart -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Recent comment and chats -->
+    <!-- ============================================================== -->
+
+</div>
+
+{% endblock content %}

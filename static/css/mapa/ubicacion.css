@@ -1,0 +1,58 @@
+body
+{
+background: #E6E6E6;
+}
+ 
+.container
+{
+background:#fff;
+box-shadow: 0 0 10px #000;
+border-radius:10px;
+height: 550px;
+margin: 0 auto;
+padding: 5px;
+width: 900px;
+text-align:center;
+}
+ 
+.capas
+{
+border: 1px solid #000;
+display:inline-block;
+height: 450px;
+vertical-align:top;
+width: 400px;
+}
+ 
+ 
+#form {
+border-bottom: 1px solid #000;
+height:250px;
+text-align:left;
+}
+ 
+ 
+#data {
+    text-align:left;
+    overflow:auto;
+}
+ 
+#ubicaciones{
+    margin:0;
+    padding:10px;
+    list-style:none;
+    height:100px;
+    width:100px;
+}
+ 
+#ubicaciones li{
+    color: #08488A;
+    font-family: Arial, sans-serif;
+}
+ 
+select[multiple] {
+    margin:0;
+    padding:0;
+    height:150px;
+    width:380px;
+}
