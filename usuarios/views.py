@@ -45,7 +45,12 @@ def incidentes(request):
 
 
 def reportarIncidente(request):
-    return render(request, 'usuarios/reportarIncidente.html')
+
+    fecha_hoy = datetime.datetime.now()
+    data = {
+        'fecha_hoy': fecha_hoy
+    }
+    return render(request, 'usuarios/reportarIncidente.html', data)
 
 
 def historial(request):
