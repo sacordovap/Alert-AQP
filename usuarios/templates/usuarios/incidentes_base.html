@@ -3,8 +3,19 @@
 
                     {% for incidente in page.object_list%}
                     <li class="d-flex no-block card-body border-top">
-                        <div class="my-auto p-2"><img src="{% static 'images/users/1.jpg' %}" alt="user" width="50"
-                                class="rounded-circle"></div>
+                        <div class="my-auto p-2">
+                        {% if  incidente.imagen_video %}
+                         <img src={{incidente.imagen_video}} alt="user" width="50">
+                        {% else %}
+                        <img src="{% static 'images/users/1.jpg' %}" alt="user" width="50"
+                                class="rounded-circle">
+                        {% endif %}
+                        
+                                
+                                
+                                
+                                
+                                </div>
                         <div class="comment-text w-100">
                             <h5 class="font-medium">{{incidente.tipo_incidente|title}}</h5>
                             <h6 class="font-medium">{{incidente.titulo | title}}</h6>

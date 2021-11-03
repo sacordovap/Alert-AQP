@@ -11,16 +11,16 @@ Form
 {% block content %}
 
 {% block extra_script%}
-  
+
 <script src="{% static "js/scripts.js" %}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyWWYeqdVOpfYEuz4s3MkFAL_LCA_nUOo" async defer></script>
-<script src="{% static "js/mapa/ubicacion.js" %}"></script>
+
+<script src="{% static "js/mapa/reportarIncidente.js" %}"></script>
 
 {% endblock extra_script %}
 
- {% block extra_style %}
-      <link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet"/>
-   {% endblock extra_style %}
+{% block extra_style %}
+<link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet" />
+{% endblock extra_style %}
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
@@ -43,71 +43,73 @@ Form
     <div class="row">
         <div class="col-md-7">
             <div class="card">
-                <form class="form-horizontal">
+           
+                <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
                     <div class="card-body">
                         <h4 class="card-title">Reportar Incidente</h4>
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tipo</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                            <div class="col-sm-9" >
+                                <select class="form-control" name="tipo_delito_id"  id="exampleFormControlSelect1">
+                                    {% for tipo_delito in tipos_delitos %}
+                                    <option value={{tipo_delito.id}}>{{tipo_delito.titulo}}</option>
+                                    {% endfor %}
+
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="titulo" class="col-sm-3 text-right control-label col-form-label">Titulo</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="titulo" placeholder="Título">
+                                <input type="text" class="form-control" id="titulo" name="titulo"  placeholder="Título">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="descripcion"
                                 class="col-sm-3 text-right control-label col-form-label">Descripción</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" id="descripcion" placeholder="Descripción"></textarea>
+                                <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label class="col-sm-3 text-right" for="file">Imagen</label>
                             <div class="col-sm-9">
                                 <div class="form-group">
-                                    <input type="file" class="form-control-file" id="file">
+                                    <input type="file"  accept="image/*" name="imagen" class="form-control-file" id="file">
                                 </div>
                             </div>
                         </div>
-   <div class="form-group row">
-                            <label 
-                                class="col-sm-3 text-right control-label col-form-label">Dirección</label>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-right control-label col-form-label">Dirección</label>
                             <div class="col-sm-9">
                                 <div class="flot-chart" style="height: 400px;" id="mapa">
-                             
-                            </div>
+                                </div>
+                                 <input type="text" class="form-control" id="latitud"  name="latitud" placeholder="latitud">
+                                  <input type="text" class="form-control" id="longitud" name="longitud" placeholder="longitud">
+                                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="fecha" class="col-sm-3 text-right control-label col-form-label">Fecha</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="fecha" value={{fecha_hoy|date:'Y-m-d'}}>
+                                <input type="date" name="fecha" class="form-control" id="fecha" value={{fecha_hoy|date:'Y-m-d'}}>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="hora" class="col-sm-3 text-right control-label col-form-label">Hora</label>
                             <div class="col-sm-9">
-                                <input type="time" class="form-control" id="hora" value="{{fecha_hoy|time:'H:i' }}">
+                                <input type="time" name="hora" class="form-control" id="hora" value="{{fecha_hoy|time:'H:i' }}">
                             </div>
                         </div>
-                       
+
 
                     </div>
                     <div class="border-top">
                         <div class="card-body text-right">
-                            <button type="button" class="btn btn-primary">Guardar</button>
-                            <a href={% url 'usuarios:index'%} type="submit" class="btn btn-danger">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href={% url 'usuarios:index' %} type="submit" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                 </form>
