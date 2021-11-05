@@ -1,3 +1,4 @@
+from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -9,6 +10,9 @@ from django.urls import reverse
 import datetime
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+from django.core import serializers
 
 
 def index(request):
@@ -122,3 +126,8 @@ def save_imagen(request):
         file_url = fss.url(file)
         return file_url
     return ""
+
+
+def incidentesCordenadas(request):
+    data = Incidente.objects.exclude(Q(latitud__isnull=True) | Q(latitud__exact='')).values()
+    return JsonResponse(list(data), safe=False)

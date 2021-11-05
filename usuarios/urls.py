@@ -11,3 +11,4 @@ urlpatterns = [
     path('mapa-predictivo/', views.mapaPredictivo, name='mapaPredictivo'),
     path('historial/', views.historial, name='historial'),
 ]
+
