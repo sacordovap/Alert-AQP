@@ -14,6 +14,9 @@ from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.core import serializers
 
+import uuid
+import os
+
 
 def index(request):
     tipo_incidentes = TipoIncidente.objects.all().annotate(
@@ -122,12 +125,20 @@ def save_imagen(request):
     if 'imagen' in request.FILES:
         imagen = request.FILES['imagen']
         fss = FileSystemStorage()
-        file = fss.save(imagen.name, imagen)
+        
+        file = fss.save(nombre_unico_imagen(imagen), imagen)
         file_url = fss.url(file)
         return file_url
-    return ""
+    return "/media/default.jpg"
 
 
 def incidentesCordenadas(request):
-    data = Incidente.objects.exclude(Q(latitud__isnull=True) | Q(latitud__exact='')).values()
+    data = Incidente.objects.exclude(
+        Q(latitud__isnull=True) | Q(latitud__exact='')).values()
     return JsonResponse(list(data), safe=False)
+
+
+def nombre_unico_imagen(imagen):
+    ext = imagen.name.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), ext)
+    return filename

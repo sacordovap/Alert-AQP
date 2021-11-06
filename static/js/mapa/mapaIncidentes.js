@@ -93,15 +93,36 @@ $(function () {
 
 
         $.get("/incidentes", {}, (data) => {
-           
-           data.forEach(incidente => {
-            const latLng = new google.maps.LatLng(incidente.latitud, incidente.longitud);
-            new google.maps.Marker({
-                position: latLng,
-                map: map,
+            //  const contentString = '<div class="d-inline-block" style="width: 18rem;"><img class="w-25" style="vertical-align: top;" src="http://127.0.0.1:8000/media/IMG-20211001-WA0003_ovOZOzC.jpg"alt="Card image cap" /><div class="d-inline-block ml-2"><h6>Titulos</h6><p>Descripcion</p><small class="text-muted">4 de Abril 2021 a las 5 pm</small></div></div>';
+            // const contentString = '<div class="card m-0 p-0" style="width: 18rem;"><img class="card-img-top mx-auto" src="http://127.0.0.1:8000/media/IMG-20211001-WA0003_ovOZOzC.jpg"alt="Card image cap" style="width: 50px;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'scontent.</p></div></div>';
+
+
+            data.forEach(incidente => {
+                const latLng = new google.maps.LatLng(incidente.latitud, incidente.longitud);
+                let marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                });
+
+                let contentString = htmlContentIncidente(incidente);
+                let infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                });
+
+                marker.addListener("mouseover", () => {
+                    infowindow.open({
+                        anchor: marker,
+                        map,
+                        shouldFocus: false,
+                    });
+                });
+                marker.addListener("mouseout", () => {
+                    infowindow.close();
+                });
             });
-           });
-           
+
+
+
         });
 
 
@@ -193,5 +214,11 @@ $(function () {
         console.log(markerCoords.lat() + '  ' + markerCoords.lng())
     }
 
+    function htmlContentIncidente(incidente) {
+        url = incidente.imagen_video;
+        fecha_hora = incidente.fecha + " "+incidente.hora;
+        let contentString = '<div class="d-inline-block" style="width: 18rem;"><img class="w-25" style="vertical-align: top;" src="'+url+'" alt="Card image cap" /><div class="d-inline-block ml-2"><h6>' + incidente.titulo + '</h6><p>' + incidente.descripcion + '</p><small class="text-muted">'+fecha_hora+'</small></div></div>';
+        return contentString;
+    }
 
 });

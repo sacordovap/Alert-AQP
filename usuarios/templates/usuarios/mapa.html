@@ -1,15 +1,15 @@
 {% extends 'usuarios/base.html' %}
 {% load static %}
 {% block extra_script%}
-  
+
 <script src="{% static "js/scripts.js" %}"></script>
 <script src="{% static "js/mapa/mapaIncidentes.js" %}"></script>
 
 {% endblock extra_script %}
 
- {% block extra_style %}
-      <link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet"/>
-   {% endblock extra_style %}
+{% block extra_style %}
+<link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet" />
+{% endblock extra_style %}
 {% block content %}
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
@@ -21,7 +21,7 @@
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href={%url 'usuarios:index'%}>Inicio</a></li>
+                        <li class="breadcrumb-item"><a href={% url 'usuarios:index' %}>Inicio</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Visualización de Mapa</li>
                     </ol>
                 </nav>
@@ -37,7 +37,8 @@
 <!-- ============================================================== -->
 
 <div class="container-fluid">
-{% include 'usuarios/mapa_base.html' %}
+
+    {% include 'usuarios/mapa_base.html' %}
 
 </div>
 
