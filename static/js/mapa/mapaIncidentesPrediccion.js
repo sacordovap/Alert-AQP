@@ -71,16 +71,19 @@ $(function () {
         console.log(lng);
 
         var latlng = new google.maps.LatLng(lat, lng);
-        var infoWindow = new google.maps.InfoWindow();
         var mapSettings = {
             center: latlng,
-            zoom: 2,
-            mapTypeId: 'terrain'
+            zoom: 13,
+            mapTypeId: 'satellite'
         }
 
         map = new google.maps.Map($('#mapa').get(0), mapSettings);
-
-
+        marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            draggable: false,
+            title: "Ubicación"
+        });
         //var marker = new google.maps.Marker({
        
 
@@ -98,9 +101,9 @@ $(function () {
 
                 const heatmap = new google.maps.visualization.HeatmapLayer({
                     data: heatmapData,
-                    dissipating: false,
                     map: map,
                 });
+                heatmap.set("radius", 20);
 
             });
 
@@ -189,19 +192,6 @@ $(function () {
         }
     }
 
-    //funcion para marcar las coordenadas
-    function getMarkerCoords(marker) {
-        var markerCoords = marker.getPosition();
-        $('#id_lat').val(markerCoords.lat());
-        $('#id_lng').val(markerCoords.lng());
-        console.log(markerCoords.lat() + '  ' + markerCoords.lng())
-    }
-
-    function htmlContentIncidente(incidente) {
-        url = incidente.imagen_video;
-        fecha_hora = incidente.fecha + " " + incidente.hora;
-        let contentString = '<div class="d-inline-block" style="width: 18rem;"><img class="w-25" style="vertical-align: top;" src="' + url + '" alt="Card image cap" /><div class="d-inline-block ml-2"><h6>' + incidente.titulo + '</h6><p>' + incidente.descripcion + '</p><small class="text-muted">' + fecha_hora + '</small></div></div>';
-        return contentString;
-    }
+   
 
 });
