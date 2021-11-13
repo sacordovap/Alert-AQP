@@ -13,17 +13,17 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.core import serializers
-
+from django.contrib.auth.decorators import login_required
 import uuid
 import os
-
+from django.contrib.auth.decorators import permission_required
 
 def login(request):
     if request.method == 'POST':
         return redirect("usuarios:index")
     return render(request, 'usuarios/login.html')
 
-
+@permission_required('usuarios.inicio')
 def index(request):
     tipo_incidentes = TipoIncidente.objects.all().annotate(
         total=Count('incidente')).order_by('-total')
@@ -32,7 +32,7 @@ def index(request):
     }
     return render(request, 'usuarios/dashboard.html', data)
 
-
+@permission_required('usuarios.mapa_incidentes')
 def mapa(request):
 
     tipo_incidentes = TipoIncidente.objects.all().annotate(
@@ -47,7 +47,7 @@ def mapa(request):
 def mapa2(request):
     return render(request, 'usuarios/mapa2.html')
 
-
+@permission_required('usuarios.listado_incidentes')
 def incidentes(request):
     incidentes = Incidente.objects.order_by('-fecha', '-hora')
     incidentes_paginator = Paginator(incidentes, 20)
@@ -58,7 +58,7 @@ def incidentes(request):
     }
     return render(request, 'usuarios/incidentes.html', data)
 
-
+@permission_required('usuarios.reportar_incidentes')
 def reportarIncidente(request):
 
     if request.method == 'POST':
@@ -73,9 +73,9 @@ def reportarIncidente(request):
     }
     return render(request, 'usuarios/reportarIncidente.html', data)
 
-
+@permission_required('usuarios.mi_historial_incidentes')
 def historial(request):
-
+    
     usuario_id = 2
     incidentes = Incidente.objects.filter(
         usuario__id=usuario_id).order_by('-id')
@@ -87,7 +87,7 @@ def historial(request):
     }
     return render(request, 'usuarios/historial.html', data)
 
-
+@permission_required('usuarios.mapa_predictivo_incidentes')
 def mapaPredictivo(request):
 
     fecha_hoy = datetime.datetime.now()  # Returns 2018-01-15 09:00

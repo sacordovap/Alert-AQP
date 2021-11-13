@@ -27,6 +27,9 @@ class Incidente(models.Model):
     estado = models.IntegerField(default= EstadoIncidente.SIN_ATENDER, choices=EstadoIncidente.choices, null=True)
     usuario = models.ForeignKey( settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     tipo_incidente = models.ForeignKey(TipoIncidente, on_delete=models.SET_NULL, null=True)
-
+    
+    class Meta:
+        permissions = (("inicio","Acceso a la pantalla de inicio de usuario ciudadano"), ("listado_incidentes", "Retorna el listado de Incidentes"), ("reportar_incidentes", "Puede reportar incidentes"), ("mi_historial_incidentes","Listado de mi historial de incidentes"), ("mapa_incidentes","Visualización de Mapa de incidentes"), ("mapa_predictivo_incidentes","Visualización de Mapa predictivo"),  )
+    
     def __str__(self):
         return self.titulo
