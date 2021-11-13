@@ -18,6 +18,12 @@ import uuid
 import os
 
 
+def login(request):
+    if request.method == 'POST':
+        return redirect("usuarios:index")
+    return render(request, 'usuarios/login.html')
+
+
 def index(request):
     tipo_incidentes = TipoIncidente.objects.all().annotate(
         total=Count('incidente')).order_by('-total')

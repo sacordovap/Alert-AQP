@@ -1,0 +1,16 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+             <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="p-t-4 text-center">
+                                    <p class="text-white">¡Desconectado!</p>
+                                        <a href="{%url 'login'%}" class="btn btn-success text-center" >Login</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top border-secondary"></div>
+{% endblock content %}
