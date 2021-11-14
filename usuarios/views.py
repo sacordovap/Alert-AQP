@@ -75,8 +75,9 @@ def reportarIncidente(request):
 
 @permission_required('usuarios.mi_historial_incidentes')
 def historial(request):
+    current_user = request.user
+    usuario_id = current_user.id
     
-    usuario_id = 2
     incidentes = Incidente.objects.filter(
         usuario__id=usuario_id).order_by('-id')
     incidentes_paginator = Paginator(incidentes, 20)
@@ -109,7 +110,7 @@ def guardarIncidente(request):
     direccion = request.POST.get('direccion')
     imagen_url = save_imagen(request)
 
-    usuario = User.objects.get(id=2)
+    usuario = request.user
     tipo_incidente = TipoIncidente.objects.get(id=tipo_incidente_id)
     incidente = Incidente.objects.create()
     incidente.tipo_incidente = tipo_incidente
