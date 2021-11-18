@@ -1,0 +1,174 @@
+{% extends "usuarios/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+<style xmlns="http://www.w3.org/1999/html">
+</style>
+{% endblock %}
+{% block page_title %}
+Form
+{% endblock %}
+{% block content %}
+
+{% block extra_script%}
+
+<script src="{% static "js/scripts.js" %}"></script>
+
+<script src="{% static "js/mapa/reportarIncidente.js" %}"></script>
+
+{% endblock extra_script %}
+
+{% block extra_style %}
+<link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet" />
+{% endblock extra_style %}
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Reportar Incidente</h4>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href={% url 'usuarios:index' %}>Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Reportar Incidente</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card">
+           
+                <form class="form-horizontal" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h4 class="card-title">Reportar Incidente</h4>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tipo</label>
+                            <div class="col-sm-9" >
+                                <select class="form-control" name="tipo_delito_id"  id="exampleFormControlSelect1">
+                                    {% for tipo_delito in tipos_delitos %}
+                                    <option value={{tipo_delito.id}}>{{tipo_delito.titulo}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="titulo" class="col-sm-3 text-right control-label col-form-label">Titulo</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="titulo" name="titulo"  placeholder="Título">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="descripcion"
+                                class="col-sm-3 text-right control-label col-form-label">Descripción</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-right" for="file">Imagen</label>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <input type="file"  accept="image/*" name="imagen" class="form-control-file" id="file">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 text-right control-label col-form-label">Dirección</label>
+                            <div class="col-sm-9">
+                                <div class="flot-chart" style="height: 400px;" id="mapa">
+                                </div>
+                                 <input type="text" class="form-control" id="latitud"  name="latitud" placeholder="latitud">
+                                  <input type="text" class="form-control" id="longitud" name="longitud" placeholder="longitud">
+                                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fecha" class="col-sm-3 text-right control-label col-form-label">Fecha</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="fecha" class="form-control" id="fecha" value={{fecha_hoy|date:'Y-m-d'}}>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="hora" class="col-sm-3 text-right control-label col-form-label">Hora</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="hora" class="form-control" id="hora" value="{{fecha_hoy|time:'H:i' }}">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="border-top">
+                        <div class="card-body text-right">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href={% url 'usuarios:index' %} type="submit" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- editor -->
+
+
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    //***********************************//
+    // For select 2
+    //***********************************//
+    $(".select2").select2();
+
+    /*colorpicker*/
+    $('.demo').each(function () {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+            control: $(this).attr('data-control') || 'hue',
+            position: $(this).attr('data-position') || 'bottom left',
+
+            change: function (value, opacity) {
+                if (!value) return;
+                if (opacity) value += ', ' + opacity;
+                if (typeof console === 'object') {
+                    console.log(value);
+                }
+            },
+            theme: 'bootstrap'
+        });
+
+    });
+    /*datwpicker*/
+    jQuery('.mydatepicker').datepicker();
+    jQuery('#datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
+{% endblock %}

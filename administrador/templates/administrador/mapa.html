@@ -1,0 +1,45 @@
+{% extends 'administrador/base.html' %}
+{% load static %}
+{% block extra_script%}
+
+<script src="{% static "js/scripts.js" %}"></script>
+<script src="{% static "js/mapa/mapaIncidentes.js" %}"></script>
+
+{% endblock extra_script %}
+
+{% block extra_style %}
+<link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet" />
+{% endblock extra_style %}
+{% block content %}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Visualización de Mapa</h4>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href={% url 'administrador:index' %}>Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Visualización de Mapa</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+
+<div class="container-fluid">
+
+    {% include 'administrador/mapa_base.html' %}
+
+</div>
+
+{% endblock content %}

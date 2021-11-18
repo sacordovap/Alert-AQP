@@ -21,6 +21,7 @@ from django.conf import settings
 from usuarios import views
 urlpatterns = [
     path('usuarios/', include('usuarios.urls')),
+    path('administrador/', include('administrador.urls')),
     path('admin/', admin.site.urls),
     path('incidentes', views.incidentesCordenadas)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

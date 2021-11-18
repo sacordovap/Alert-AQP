@@ -1,0 +1,124 @@
+{% extends 'administrador/base.html' %}
+{% load static %}
+{% block extra_script%}
+  
+<script src="{% static "js/scripts.js" %}"></script>
+<script src="{% static "js/mapa/mapaIncidentes.js" %}"></script>
+
+{% endblock extra_script %}
+
+ {% block extra_style %}
+      <link href="{% static 'css/mapa/ubicacion.css' %}" rel="stylesheet"/>
+   {% endblock extra_style %}
+    {% block content %}
+       
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h6 class="text-white">Dashboard</h6>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <h6 class="text-white">Mi historial</h6>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
+                                <h6 class="text-white">Incidentes Recientes</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                   
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                                <h6 class="text-white">Visualización de Mapa</h6>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                                <h6 class="text-white">Incidentes Antiguos</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
+                                <h6 class="text-white">Mapa Predictivo</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                   
+                 
+                </div>
+                {% include 'administrador/mapa_base.html' %}
+            </div>      
+
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+              
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+      
+           
+    {% endblock content %} 
+       
