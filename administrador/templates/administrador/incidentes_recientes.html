@@ -1,4 +1,4 @@
-{% extends 'usuarios/base.html' %}
+{% extends 'administrador/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,12 +9,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title">Incidentes Reportados</h4>
+            <h4 class="page-title">Incidentes Recientes</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href={% url 'usuarios:index' %}>Inicio</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Incidentes Reportados</li>
+                        <li class="breadcrumb-item"><a href={% url 'administrador:index' %}>Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Incidentes Recientes</li>
                     </ol>
                 </nav>
             </div>
@@ -42,37 +42,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title m-b-0">Incidentes mas recientes</h4>
+                    <div>
+                    </div>
                 </div>
-                  {% include 'usuarios/incidentes_base.html' %}
-
-                      <div class="row">
-
-
-                    <ul class="pagination flex-center mx-auto text-center">
-                        {% if page.has_previous %}
-                        <li class="paginate_button page-item previous"><a
-                                href="{% url 'usuarios:incidentes'%}?page={{page.previous_page_number}}"
-                                aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
-                        </li>
-                        {% else %}
-                        <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
-                                data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
-                        </li>
-                        {% endif %}
-
-                        {% if page.has_next %}
-                        <li class="paginate_button page-item previous"><a
-                                href="{% url 'usuarios:incidentes'%}?page={{page.next_page_number}}"
-                                aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
-                        </li>
-                        {% else %}
-                        <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
-                                data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-
-
                 </div>
             </div>
         </div>

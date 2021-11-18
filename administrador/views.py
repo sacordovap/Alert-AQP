@@ -13,17 +13,7 @@ def index(request):
     return render(request, 'administrador/dashboard.html', data)
 
 def historial(request):
-    current_user = request.user
-    administrador_id = current_user.id
-    
-    incidentes = Incidente.objects.order_by('-fecha', '-hora')
-    incidentes_paginator = Paginator(incidentes, 20)
-    page_num = request.GET.get('page')
-    page = incidentes_paginator.get_page(page_num)
-    data = {
-        'page': page,
-    }
-    return render(request, 'administrador/historial.html', data)
+    return render(request, 'administrador/historial.html')
 
 def mapa(request):
 
@@ -42,4 +32,12 @@ def mapaPredictivo(request):
     data = {
         'fecha_hoy': fecha_hoy
     }
+    
     return render(request, 'administrador/mapaPredictivo.html', data)
+
+def inicidentes_recientes(request):
+    return render(request, 'administrador/incidentes_recientes.html')
+
+def inicidentes_antiguos(request):
+    return render(request, 'administrador/incidentes_antiguos.html')
+
