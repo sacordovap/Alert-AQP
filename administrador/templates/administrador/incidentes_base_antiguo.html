@@ -29,19 +29,15 @@
                         <div class="my-auto mx-4" style="min-width:80px">
                             <div class="text-right">
                               
-                                <button type="button" class="btn btn-sm text-white  btn
-                                mt-3
-                                btn-info
-                                d-block
-                                waves-effect waves-light">
-                                    Atender Incidente
+                                <button type="button" class="btn btn-sm text-white  btn-primary d-block waves-effect waves-light">
+                                    Ver detalles
                                   </button>
                             </div>
                         </div>
                     </li>
 
                     {% empty %}
-                    <li class="d-flex no-block card-body border-top"> No hay incidentes recientes</li>
+                    <li class="d-flex no-block card-body border-top"> No hay incidentes antiguos</li>
                     {% endfor %}
                 </ul>
             

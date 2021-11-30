@@ -42,9 +42,37 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title m-b-0">Incidentes mas recientes</h4>
-                    <div>
-                    </div>
                 </div>
+                  {% include 'administrador/incidentes_base.html' %}
+
+                      <div class="row">
+
+
+                    <ul class="pagination flex-center mx-auto text-center">
+                        {% if page.has_previous %}
+                        <li class="paginate_button page-item previous"><a
+                                href="{% url 'administrador:incidentes-recientes'%}?page={{page.previous_page_number}}"
+                                aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                        </li>
+                        {% else %}
+                        <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
+                                data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                        </li>
+                        {% endif %}
+
+                        {% if page.has_next %}
+                        <li class="paginate_button page-item previous"><a
+                                href="{% url 'administrador:incidentes-recientes'%}?page={{page.next_page_number}}"
+                                aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
+                        </li>
+                        {% else %}
+                        <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
+                                data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+
                 </div>
             </div>
         </div>
