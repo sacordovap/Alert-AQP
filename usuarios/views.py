@@ -17,11 +17,20 @@ from django.contrib.auth.decorators import login_required
 import uuid
 import os
 from django.contrib.auth.decorators import permission_required
-
+from django.contrib.auth.decorators import login_required
 def login(request):
     if request.method == 'POST':
         return redirect("usuarios:index")
     return render(request, 'usuarios/login.html')
+
+@login_required
+def redirectInicio(request):
+    group = request.user.groups.filter(user=request.user)[0]
+    if group.name=="Administrador":
+        return redirect("administrador:index")
+    
+    return redirect("usuarios:index")
+
 
 @permission_required('usuarios.inicio')
 def index(request):
