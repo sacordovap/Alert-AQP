@@ -36,8 +36,22 @@ def mapaPredictivo(request):
     return render(request, 'administrador/mapaPredictivo.html', data)
 
 def inicidentes_recientes(request):
-    return render(request, 'administrador/incidentes_recientes.html')
+    incidentes = Incidente.objects.order_by('-fecha', '-hora')
+    incidentes_paginator = Paginator(incidentes, 5)
+    page_num = request.GET.get('page')
+    page = incidentes_paginator.get_page(page_num)
+    data = {
+        'page': page,
+    }
+    return render(request, 'administrador/incidentes_recientes.html', data)
 
 def inicidentes_antiguos(request):
-    return render(request, 'administrador/incidentes_antiguos.html')
+    incidentes = Incidente.objects.order_by('-fecha', '-hora')
+    incidentes_paginator = Paginator(incidentes, 5)
+    page_num = request.GET.get('page')
+    page = incidentes_paginator.get_page(page_num)
+    data = {
+        'page': page,
+    }
+    return render(request, 'administrador/incidentes_antiguos.html', data)
 
