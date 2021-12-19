@@ -17,7 +17,6 @@ class TipoIncidente(models.Model):
     def __str__(self):
         return self.titulo
 
-
 class Incidente(models.Model):
     titulo = models.CharField(max_length=100, null=True)
     descripcion = models.CharField(max_length=255, null=True)
