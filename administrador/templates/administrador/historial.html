@@ -43,6 +43,80 @@
                 <div class="card-body">
                     <h4 class="card-title m-b-0">Mi historial de Incidentes atendidos</h4>
                 </div>
+              
+                    <ul class="list-style-none">
+
+                        {% for incidenteAtendido in page.object_list%}
+                        <li class="d-flex no-block card-body border-top">
+                            <div class="my-auto p-2">
+                            {% if  incidenteAtendido.incidente.imagen_video %}
+                             <img src={{incidenteAtendido.incidente.imagen_video}} alt="user" width="50">
+                            {% else %}
+                            <img src="{% static 'images/users/1.jpg' %}" alt="user" width="50"
+                                    class="rounded-circle">
+                            {% endif %}
+                            
+                                    
+                                    
+                                    
+                                    
+                                    </div>
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">{{incidenteAtendido.incidente.tipo_incidente|title}}</h5>
+                                <h6 class="font-medium">{{incidenteAtendido.incidente.titulo | title}}</h6>
+                                <span class="d-block">{{incidenteAtendido.incidente.descripcion}}</span>
+                                <div class="comment-footer mt-1">
+                                    <small class="text-muted d-block">Dirección: {{incidenteAtendido.incidente.direccion}}</small>
+                                    <small class="text-muted"> {{incidenteAtendido.incidente.fecha|date:'d-M-Y'}} {{incidenteAtendido.incidente.hora}}</small>
+                                </div>
+                              
+                            </div>
+                            <div class="comment-text w-100">
+                                <h5 class="font-medium">Reporte de Incidente</h5>
+                                <h6 class="font-medium">Falsa Alarma: {{incidenteAtendido.false_alarma}}</h6>
+                                <span class="d-block">Observaciones: {{incidenteAtendido.observaciones}}</span>
+                                <div class="comment-footer mt-1">
+                                    <small class="text-muted">{{incidenteAtendido.fecha|date:'d-M-Y'}} {{incidenteAtendido.hora}}</small>
+                                </div>
+                              
+                            </div>
+                          
+                        </li>
+    
+                        {% empty %}
+                        <li class="d-flex no-block card-body border-top"> No hay incidentes atendidos en su historial </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="row">
+
+
+                        <ul class="pagination flex-center mx-auto text-center">
+                            {% if page.has_previous %}
+                            <li class="paginate_button page-item previous"><a
+                                    href="{% url 'administrador:historial'%}?page={{page.previous_page_number}}"
+                                    aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                            </li>
+                            {% else %}
+                            <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
+                                    data-dt-idx="0" tabindex="0" class="page-link">Anterior</a>
+                            </li>
+                            {% endif %}
+    
+                            {% if page.has_next %}
+                            <li class="paginate_button page-item previous"><a
+                                    href="{% url 'administrador:historial'%}?page={{page.next_page_number}}"
+                                    aria-controls="zero_config" data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
+                            </li>
+                            {% else %}
+                            <li class="paginate_button page-item previous disabled"><a href="" aria-controls="zero_config"
+                                    data-dt-idx="0" tabindex="0" class="page-link">Siguiente</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+    
+    
+                    </div>
+
                 </div>
             </div>
         </div>

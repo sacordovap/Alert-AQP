@@ -34,9 +34,51 @@
         <!-- card new -->
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title m-b-0">Incidentes mas recientes</h4>
+                <h4 class="card-title m-b-0">Incidentes Antiguos</h4>
             </div>
-              {% include 'administrador/incidentes_base_antiguo.html' %}
+            <ul class="list-style-none">
+
+                {% for incidenteAtendido in page.object_list%}
+                <li class="d-flex no-block card-body border-top">
+                    <div class="my-auto p-2">
+                    {% if  incidenteAtendido.incidente.imagen_video %}
+                     <img src={{incidenteAtendido.incidente.imagen_video}} alt="user" width="50">
+                    {% else %}
+                    <img src="{% static 'images/users/1.jpg' %}" alt="user" width="50"
+                            class="rounded-circle">
+                    {% endif %}
+                    
+                            
+                            
+                            
+                            
+                            </div>
+                    <div class="comment-text w-100">
+                        <h5 class="font-medium">{{incidenteAtendido.incidente.tipo_incidente|title}}</h5>
+                        <h6 class="font-medium">{{incidenteAtendido.incidente.titulo | title}}</h6>
+                        <span class="d-block">{{incidenteAtendido.incidente.descripcion}}</span>
+                        <div class="comment-footer mt-1">
+                            <small class="text-muted d-block">Dirección: {{incidenteAtendido.incidente.direccion}}</small>
+                            <small class="text-muted"> {{incidenteAtendido.incidente.fecha|date:'d-M-Y'}} {{incidenteAtendido.incidente.hora}}</small>
+                        </div>
+                      
+                    </div>
+                    <div class="comment-text w-100">
+                        <h5 class="font-medium">Reporte de Incidente</h5>
+                        <h6 class="font-medium">Falsa Alarma: {{incidenteAtendido.false_alarma}}</h6>
+                        <span class="d-block">Observaciones: {{incidenteAtendido.observaciones}}</span>
+                        <div class="comment-footer mt-1">
+                            <small class="text-muted">{{incidenteAtendido.fecha|date:'d-M-Y'}} {{incidenteAtendido.hora}}</small>
+                        </div>
+                      
+                    </div>
+                  
+                </li>
+
+                {% empty %}
+                <li class="d-flex no-block card-body border-top"> No hay incidentes antiguos </li>
+                {% endfor %}
+            </ul>
 
                   <div class="row">
 
