@@ -107,12 +107,13 @@ def guardarAtenderIncidente(request):
     atenderIncidente = AtenderIncidente.objects.create()
     atenderIncidente.incidente = incidente
     atenderIncidente.usuario = usuario
-    atenderIncidente.titulo = observaciones
+    atenderIncidente.observaciones = observaciones
     atenderIncidente.fecha = fecha
     atenderIncidente.hora = hora
     atenderIncidente.imagen_video = imagen_url
     atenderIncidente.false_alarma = falsa_alarma
     atenderIncidente.save()
+    print("Observaciones: ",observaciones)
     incidente.estado = EstadoIncidente.ARCHIVADO
     incidente.save()
     print("Guardando Datos")
