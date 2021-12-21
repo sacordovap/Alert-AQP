@@ -1,0 +1,9 @@
+*/*/*/__pycache__/
+
+*/*/__pycache__/
+
+*/__pycache__/
+mysite/__pycache__/
+administrador/__pycache__/
+usuarios/__pycache__/
+media/
