@@ -34,7 +34,7 @@ def historial(request):
 
 
     return render(request, 'administrador/historial.html', data)
-
+@permission_required('usuarios.mapa_incidentes_admin')
 def mapa(request):
 
     tipo_incidentes = TipoIncidente.objects.all().annotate(
@@ -55,6 +55,7 @@ def mapaPredictivo(request):
     
     return render(request, 'administrador/mapaPredictivo.html', data)
 
+@permission_required('usuarios.listado_incidentes_recientes_admin')
 def inicidentes_recientes(request):
     
     if request.method == 'POST':

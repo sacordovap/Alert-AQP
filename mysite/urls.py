@@ -20,6 +20,7 @@ from django.conf import settings
 
 from usuarios import views
 urlpatterns = [
+    path('', views.indexLogin),
     path('inicio', views.redirectInicio),
     path('usuarios/', include('usuarios.urls')),
     path('administrador/', include('administrador.urls')),

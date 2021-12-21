@@ -158,3 +158,6 @@ def nombre_unico_imagen(imagen):
     ext = imagen.name.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return filename
+
+def indexLogin(request):
+     return redirect("/accounts/login")
