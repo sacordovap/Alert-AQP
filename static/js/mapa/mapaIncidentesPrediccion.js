@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     initialize();
 
@@ -14,12 +14,10 @@ $(function () {
                     timeout: 10000
                 });
 
-            }
-            catch (error) {
+            } catch (error) {
                 console.log(error);
             }
-        }
-        else {
+        } else {
             //una console.loga indicando que no tiene soporte
             console.log('Geolocation unsupported');
         }
@@ -34,8 +32,7 @@ $(function () {
             lng = cords.longitude
 
             createMap(lat, lng)
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
     }
@@ -73,8 +70,7 @@ $(function () {
         var latlng = new google.maps.LatLng(lat, lng);
         var mapSettings = {
             center: latlng,
-            zoom: 13,
-            mapTypeId: 'satellite'
+            zoom: 6,
         }
 
         map = new google.maps.Map($('#mapa').get(0), mapSettings);
@@ -85,27 +81,49 @@ $(function () {
             title: "Ubicación"
         });
         //var marker = new google.maps.Marker({
-       
 
-        
+
+
 
 
         $.get("/incidentes", {}, (data) => {
             //  const contentString = '<div class="d-inline-block" style="width: 18rem;"><img class="w-25" style="vertical-align: top;" src="http://127.0.0.1:8000/media/IMG-20211001-WA0003_ovOZOzC.jpg"alt="Card image cap" /><div class="d-inline-block ml-2"><h6>Titulos</h6><p>Descripcion</p><small class="text-muted">4 de Abril 2021 a las 5 pm</small></div></div>';
             // const contentString = '<div class="card m-0 p-0" style="width: 18rem;"><img class="card-img-top mx-auto" src="http://127.0.0.1:8000/media/IMG-20211001-WA0003_ovOZOzC.jpg"alt="Card image cap" style="width: 50px;"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'scontent.</p></div></div>';
+            $.ajax({
+                type: "GET",
+                url: "/static/js/mapa/dataset_concoordenadas.csv",
+                dataType: "text",
+                success: function(csv) {
 
-            const heatmapData = [];
-            data.forEach(incidente => {
-                const latLng = new google.maps.LatLng(incidente.latitud, incidente.longitud);
-                heatmapData.push(latLng);
+                    const heatmapData = [];
 
-                const heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatmapData,
-                    map: map,
-                });
-                heatmap.set("radius", 20);
+                    var allTextLines = csv.split(/\r\n|\n/);
+                    allTextLines.forEach(line => {
+                        var columnas = line.split(';');
+                        const latLng = new google.maps.LatLng(columnas[8], columnas[9]);
+                        heatmapData.push(latLng);
+                    });
 
+
+
+
+
+                    data.forEach(incidente => {
+                        const latLng = new google.maps.LatLng(incidente.latitud, incidente.longitud);
+                        heatmapData.push(latLng);
+                        const heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: heatmapData,
+                            map: map,
+
+                        });
+                        heatmap.set("radius", 20);
+                    });
+
+                }
             });
+
+
+
 
 
 
@@ -182,7 +200,7 @@ $(function () {
 
         if (navigator.geolocation) {
 
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(function(position) {
 
                 var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -192,6 +210,6 @@ $(function () {
         }
     }
 
-   
+
 
 });
