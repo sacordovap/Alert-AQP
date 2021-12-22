@@ -1,0 +1,48 @@
+  {% load static %}
+
+ 
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombres Completos</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Rol</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in page.object_list%}
+        <tr>
+          <th scope="row">{% autoescape on %}
+            {{ forloop.counter0|add:page.start_index}}
+        {% endautoescape %}</th>
+          <td>{{usuario.first_name}} {{usuario.last_name}}</td>
+          <td>{{usuario.username}}</td>
+          <td>{{usuario.email}}</td>
+          <td>{{usuario.groups.all.0}}</td>
+          <td><a  href= "{% url 'administrador:usuarios-eliminar'%}?id={{usuario.id}}" class="btn btn-sm text-white  btn
+            btn-danger
+            d-block
+            waves-effect waves-light" onclick="return confirm('¿Estas seguro de realizar esta operación?')">
+                Eliminar
+          </a></td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center">No hay Usuarios</td>
+        </tr> 
+        {% endfor %}
+      
+
+      </tbody>
+
+
+    </table>
+  
+
+
+                  
+       
+            
